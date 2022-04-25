@@ -8,17 +8,21 @@ for (let index = 1; index <= 100; index++) {
   let phrase = "";
 
   //set phrase
-
   if (index % 3 == 0 && index % 5 == 0) {
-    console.log("FizzBuzz");
-    continue;
+    phrase = "FizzBuzz";
   } else if (index % 3 == 0) {
-    console.log("Fizz");
-    continue;
+    phrase = "Fizz";
   } else if (index % 5 == 0) {
-    console.log("Buzz");
-    continue;
+    phrase = "Buzz";
+  } else if (index % 11 == 0) {
+    phrase = "Bong";
   } else {
-    console.log(index);
+    phrase = `${index}`;
   }
+
+  if (index % 7 == 0) {
+    phrase += "Bang";
+  }
+
+  console.log(phrase);
 }
