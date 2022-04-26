@@ -17,6 +17,9 @@ greet();
 // 6. If a number is a multiple of 13, print "Fezz" instead of the number.
 //      For multiples of most other numbers, the Fezz goes immediately in front of the first thing
 //      beginning with B, or at the end if there are none.
+// 7. If a number is a multiple of 17, reverse the order in which any fizzes, buzzes, bangs etc. are
+//      printed.
+// 8. Prompt the user for a maximum number
 
 function otherPhraseNeeded(currentNum) {
   const multiples = [3, 5, 7, 11, 13, 17];
@@ -55,13 +58,24 @@ function getOtherPhrases(currentNum) {
   return phrase.join("");
 }
 
-for (let i = 1; i <= 100; i++) {
-  if (otherPhraseNeeded(i)) {
-    const phrase = getOtherPhrases(i);
-    console.log(phrase);
-  } else {
-    console.log(i.toString());
+function fizzBuzz(maxNum) {
+  for (let i = 1; i <= maxNum; i++) {
+    if (otherPhraseNeeded(i)) {
+      const phrase = getOtherPhrases(i);
+      console.log(phrase);
+    } else {
+      console.log(i.toString());
+    }
   }
 }
 
-// Questions
+const readline = require("readline");
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+rl.question("Please provide a maximum number: ", function (maxNum) {
+  fizzBuzz(maxNum);
+  rl.close();
+});
