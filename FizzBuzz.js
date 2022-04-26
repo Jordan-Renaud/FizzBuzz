@@ -19,25 +19,40 @@ greet();
 //      beginning with B, or at the end if there are none.
 
 function otherPhraseNeeded(currentNum) {
-  const multiples = [3, 5, 7, 11, 13];
+  const multiples = [3, 5, 7, 11, 13, 17];
   const multipleCheck = (x) => currentNum % x === 0;
 
   return multiples.some(multipleCheck);
 }
 
+function insertFezzAfterBs(phrase) {
+  const startsWithB = phrase.filter((word) => word.startsWith("B"));
+  const startsWithF = phrase.filter((word) => word.startsWith("F"));
+
+  return [...startsWithB, "Fezz", ...startsWithF];
+}
+
+function reverseIfPhraseExists(phrase, currentNum) {
+  if (phrase.length === 0) {
+    return `${currentNum}`;
+  } else {
+    return phrase.reverse();
+  }
+}
+
 function getOtherPhrases(currentNum) {
-  let phrase = "";
+  let phrase = [];
 
-  //multiples of 11 should only contain Bong
-  if (currentNum % 11 === 0) return "Bong";
+  if (currentNum % 3 === 0) phrase.push("Fizz");
+  if (currentNum % 5 === 0) phrase.push("Buzz");
+  if (currentNum % 7 === 0) phrase.push("Bang");
+  //multiples of 11 should only contain "Bong" or "Fezz"
+  if (currentNum % 11 === 0) phrase = ["Bong"];
+  if (currentNum % 13 === 0) phrase = insertFezzAfterBs(phrase);
+  if (currentNum % 17 === 0)
+    phrase.push(reverseIfPhraseExists(phrase, currentNum));
 
-  if (currentNum % 3 === 0) phrase += "Fizz";
-  //order important for placement of Fezz
-  if (currentNum % 13 === 0) phrase += "Fezz";
-  if (currentNum % 5 === 0) phrase += "Buzz";
-  if (currentNum % 7 === 0) phrase += "Bang";
-
-  return phrase;
+  return phrase.join("");
 }
 
 for (let i = 1; i <= 100; i++) {
