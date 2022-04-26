@@ -16,34 +16,32 @@ greet();
 //      Do not print anything else in these cases
 
 function otherPhraseNeeded(currentNum) {
-  return (
-    currentNum % 3 === 0 ||
-    currentNum % 5 === 0 ||
-    currentNum % 7 === 0 ||
-    currentNum % 11 === 0
-  );
+  const multiples = [3, 5, 7, 11];
+  const multipleCheck = (x) => currentNum % x === 0;
+
+  return multiples.some(multipleCheck);
 }
 
 function getOtherPhrases(currentNum) {
   let phrase = "";
 
+  //multiples of 11 should only contain Bong
+  if (currentNum % 11 === 0) return "Bong";
+
   if (currentNum % 3 === 0) phrase += "Fizz";
   if (currentNum % 5 === 0) phrase += "Buzz";
   if (currentNum % 7 === 0) phrase += "Bang";
-
-  //completely removes all other cases except 11
-  if (currentNum % 11 === 0) phrase = "Bong";
 
   return phrase;
 }
 
 for (let i = 1; i <= 100; i++) {
   if (otherPhraseNeeded(i)) {
-    console.log(getOtherPhrases(i));
+    const phrase = getOtherPhrases(i);
+    console.log(phrase);
   } else {
     console.log(i.toString());
   }
 }
 
 // Questions
-// line 33 use comment? also, could straight away return "Bong" rather than setting it
