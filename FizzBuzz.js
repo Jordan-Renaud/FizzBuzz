@@ -75,7 +75,14 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-rl.question("Please provide a maximum number: ", function (maxNum) {
-  fizzBuzz(maxNum);
+let userInput = null;
+
+rl.question("Please provide a maximum number: ", function (input) {
+  if (Math.sign(input) === NaN || Math.sign(input) !== 1) {
+    console.log("Sorry that was not a supported number.");
+  } else {
+    fizzBuzz(input);
+  }
+
   rl.close();
 });
